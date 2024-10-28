@@ -21,38 +21,38 @@
 # First, let's create the utility files:
 
 # utils/video_processor.py
-import ffmpeg
 import os
 from pathlib import Path
+import ffmpeg_python
 
 class VideoProcessor:
     def __init__(self):
         self.temp_dir = None
         self.transcription = None
 
-
+    @staticmethod
+    def check_ffmpeg_installation():
+        try:
+            ffmpeg_python.FFmpeg().version()
+            return True
+        except:
+            return False
 
     @staticmethod
     def convert_video_to_audio(input_file, output_file):
         try:
-            # Using ffmpeg-python to create the stream
-            stream = ffmpeg.input(input_file)
+            command = [
+                '-y',  # Overwrite output file if it exists
+                '-i', input_file,
+                '-ac', '1',
+                '-ar', '16000',
+                '-c:a', 'pcm_s16le',
+                output_file
+            ]
             
-            # Configure the audio settings
-            stream = ffmpeg.output(
-                stream,
-                output_file,
-                acodec='pcm_s16le',  # Audio codec
-                ac=1,                 # Number of audio channels (mono)
-                ar=16000,            # Audio sample rate
-                loglevel='error'     # Reduce logging output
-            )
-            
-            # Overwrite output file if it exists
-            stream = ffmpeg.overwrite_output(stream)
-            
-            # Run the ffmpeg command
-            ffmpeg.run(stream, quiet=True)
+            # Use FFmpeg wrapper
+            ff = ffmpeg_python.FFmpeg()
+            ff.run(command)
             return True
             
         except Exception as e:
