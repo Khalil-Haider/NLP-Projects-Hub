@@ -54,4 +54,5 @@ class VideoProcessor:
             return True
             
         except Exception as e:
+
             raise Exception(f"Error during conversion: {str(e)}")
