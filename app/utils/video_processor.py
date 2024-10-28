@@ -21,7 +21,7 @@
 # First, let's create the utility files:
 
 # utils/video_processor.py
-import subprocess
+import ffmpeg
 import os
 from pathlib import Path
 
@@ -33,27 +33,34 @@ class VideoProcessor:
     @staticmethod
     def check_ffmpeg_installation():
         try:
-            subprocess.run(["ffmpeg", "-version"], capture_output=True, check=True)
-            subprocess.run(["ffprobe", "-version"], capture_output=True, check=True)
+            # ffmpeg-python will raise an error if ffmpeg is not installed
+            probe = ffmpeg.probe("dummy")
             return True
-        except (subprocess.CalledProcessError, FileNotFoundError):
+        except:
             return False
 
     @staticmethod
     def convert_video_to_audio(input_file, output_file):
         try:
-            cmd = [
-                "ffmpeg",
-                "-y",
-                "-i", input_file,
-                "-ac", "1",
-                "-ar", "16000",
-                "-c:a", "pcm_s16le",
-                output_file
-            ]
-            result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            return result.returncode == 0
+            # Using ffmpeg-python to create the stream
+            stream = ffmpeg.input(input_file)
+            
+            # Configure the audio settings
+            stream = ffmpeg.output(
+                stream,
+                output_file,
+                acodec='pcm_s16le',  # Audio codec
+                ac=1,                 # Number of audio channels (mono)
+                ar=16000,            # Audio sample rate
+                loglevel='error'     # Reduce logging output
+            )
+            
+            # Overwrite output file if it exists
+            stream = ffmpeg.overwrite_output(stream)
+            
+            # Run the ffmpeg command
+            ffmpeg.run(stream, quiet=True)
+            return True
+            
         except Exception as e:
             raise Exception(f"Error during conversion: {str(e)}")
-        
-
