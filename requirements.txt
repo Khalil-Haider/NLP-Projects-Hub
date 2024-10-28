@@ -1,8 +1,7 @@
-
 transformers==4.46.0
 torch==2.5.0
 accelerate==1.0.1
-ffmpeg-python==6.1.1
+ffmpeg-python==0.2.0
 streamlit==1.39.0
 langchain==0.3.4
 sentence-transformers==3.2.1
