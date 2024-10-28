@@ -1,6 +1,7 @@
 transformers==4.46.0
 torch==2.5.0
 accelerate==1.0.1
+moviepy==1.0.3
 ffmpeg==1.4
 ffmpeg-python==0.2.0
 streamlit==1.39.0
