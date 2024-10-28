@@ -1,0 +1,39 @@
+/* style.css */
+/* style.css */
+.stApp {
+    max-width: 1700px;
+    margin: 0 auto;
+    /*background-image: url('https://play-lh.googleusercontent.com/4yfO7y83V_0H0jR66QilCnP3IG1kmOpRX6w5G_NY3xA5NnL1PWlm6NEkN8GY8Kole2E=w526-h296-rw'); /* Ensure this is correct */
+    background-size: contain; /* Changed to contain for full visibility */
+    background-position: center;
+    background-repeat: no-repeat; /* Prevents tiling */
+    height: auto; /* Adjusts height automatically */
+    min-height: 100vh; /* Ensures it covers at least the full viewport height */
+    color: #d6d0d0; /* Change text color for better contrast */
+    overflow-y: auto; /* Allows vertical scrolling if content overflows */
+}
+
+.feature-card {
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    background-color: rgba(16, 8, 8, 0.8); /* Semi-transparent background for cards */
+    margin: 1rem 0;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.main-title {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+    color: #1f1f1f;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: #666;
+    margin-bottom: 3rem;
+}
