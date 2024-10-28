@@ -21,9 +21,9 @@
 # First, let's create the utility files:
 
 # utils/video_processor.py
-import subprocess
 import os
 from pathlib import Path
+from moviepy.editor import VideoFileClip
 
 class VideoProcessor:
     def __init__(self):
@@ -31,29 +31,27 @@ class VideoProcessor:
         self.transcription = None
 
     @staticmethod
-    def check_ffmpeg_installation():
-        try:
-            subprocess.run(["ffmpeg", "-version"], capture_output=True, check=True)
-            subprocess.run(["ffprobe", "-version"], capture_output=True, check=True)
-            return True
-        except (subprocess.CalledProcessError, FileNotFoundError):
-            return False
-
-    @staticmethod
     def convert_video_to_audio(input_file, output_file):
         try:
-            cmd = [
-                "ffmpeg",
-                "-y",
-                "-i", input_file,
-                "-ac", "1",
-                "-ar", "16000",
-                "-c:a", "pcm_s16le",
-                output_file
-            ]
-            result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-            return result.returncode == 0
+            # Load the video file
+            video = VideoFileClip(input_file)
+            
+            # Extract the audio
+            audio = video.audio
+            
+            # Write the audio file
+            audio.write_audiofile(
+                output_file,
+                fps=16000,      # Sample rate
+                nbytes=2,       # 16-bit audio
+                codec='pcm_s16le'  # Same codec as before
+            )
+            
+            # Close the clips to free up system resources
+            audio.close()
+            video.close()
+            
+            return True
+            
         except Exception as e:
             raise Exception(f"Error during conversion: {str(e)}")
-        
-

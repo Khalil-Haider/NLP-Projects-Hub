@@ -235,7 +235,7 @@ st.set_page_config(
 class VideoTextConverter:
     def __init__(self):
         self.transcriber = AudioTranscriber()
-        self.transcriber.load_model()
+        #self.transcriber.load_model()
         
     def convert_video_to_text(self, uploaded_file, language, include_timestamps):
         """Process video file and return transcription with PDF"""

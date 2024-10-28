@@ -194,7 +194,7 @@ def main():
                     with st.spinner("🔄 Processing your audio..."):
                         try:
                             transcriber = AudioTranscriber()
-                            transcriber.load_model()
+                            #transcriber.load_model()
 
                             with tempfile.NamedTemporaryFile(delete=False, suffix='.wav') as tmp_file:
                                 tmp_file.write(uploaded_file.getvalue())

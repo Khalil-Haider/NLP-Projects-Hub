@@ -1,25 +1,23 @@
-# Core ML Libraries
-torch==2.5.0
 transformers==4.46.0
+torch==2.5.0
 accelerate==1.0.1
-sentence-transformers==3.2.1
-faiss-cpu==1.9.0
-
-# Audio Processing
-ffmpeg-python==6.1.1
-
-# Web Framework
+moviepy==1.0.3
+ffmpeg==1.4
+ffmpeg-python==0.2.0
 streamlit==1.39.0
-
-# Language Processing
 langchain==0.3.4
-langchain-community==0.3.3
-google-ai-generativelanguage==0.6.11
-
-# PDF Processing
+sentence-transformers==3.2.1
 pypdf==5.0.1
-reportlab==3.6.13
-
-# Dependencies
-grpcio==1.67.0
-grpcio-status==1.67.0
+reportlab==4.0.4
+langchain-community==0.3.3
+langchain-google-genai==2.0.1
+google-ai-generativelanguage==0.6.10
+faiss-cpu==1.9.0
+numpy==1.26.4
+pandas==2.2.2
+Pillow==10.4.0
+pydantic==2.8.2
+requests==2.32.3
+scikit-learn==1.5.1
+scipy==1.13.1
+protobuf==5.28.3

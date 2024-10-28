@@ -242,7 +242,7 @@ def main():
                 try:
                     # Initialize transcriber
                     transcriber = AudioTranscriber()
-                    transcriber.load_model()
+                    #transcriber.load_model()
                     
                     # Save temporary file and transcribe
                     with tempfile.NamedTemporaryFile(delete=False, suffix='.wav') as tmp_file:

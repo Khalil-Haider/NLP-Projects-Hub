@@ -29,7 +29,7 @@ from utils.audio_processor import AudioTranscriber
 class VideoToPDFConverter:
     def __init__(self):
         self.transcriber = AudioTranscriber()
-        self.transcriber.load_model()
+        #self.transcriber.load_model()
 
     def convert_video_to_pdf(self, uploaded_file) -> bytes:
         """Convert video to audio, transcribe, and generate a PDF."""
