@@ -6,7 +6,7 @@ streamlit==1.39.0
 langchain==0.3.4
 sentence-transformers==3.2.1
 pypdf==5.0.1
-reportlab==3.6.13
+reportlab==4.0.4
 langchain-community==0.3.3
 google-ai-generativelanguage==0.6.11
 faiss-cpu==1.9.0
