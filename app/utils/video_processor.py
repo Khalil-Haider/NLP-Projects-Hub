@@ -30,14 +30,7 @@ class VideoProcessor:
         self.temp_dir = None
         self.transcription = None
 
-    @staticmethod
-    def check_ffmpeg_installation():
-        try:
-            # ffmpeg-python will raise an error if ffmpeg is not installed
-            probe = ffmpeg.probe("dummy")
-            return True
-        except:
-            return False
+
 
     @staticmethod
     def convert_video_to_audio(input_file, output_file):
