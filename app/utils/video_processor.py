@@ -21,9 +21,9 @@
 # First, let's create the utility files:
 
 # utils/video_processor.py
+import subprocess
 import os
 from pathlib import Path
-import ffmpeg_python
 
 class VideoProcessor:
     def __init__(self):
@@ -31,29 +31,18 @@ class VideoProcessor:
         self.transcription = None
 
     @staticmethod
-    def check_ffmpeg_installation():
-        try:
-            ffmpeg_python.FFmpeg().version()
-            return True
-        except:
-            return False
-
-    @staticmethod
     def convert_video_to_audio(input_file, output_file):
         try:
-            command = [
-                '-y',  # Overwrite output file if it exists
-                '-i', input_file,
-                '-ac', '1',
-                '-ar', '16000',
-                '-c:a', 'pcm_s16le',
+            cmd = [
+                "ffmpeg",
+                "-y",
+                "-i", input_file,
+                "-ac", "1",
+                "-ar", "16000",
+                "-c:a", "pcm_s16le",
                 output_file
             ]
-            
-            # Use FFmpeg wrapper
-            ff = ffmpeg_python.FFmpeg()
-            ff.run(command)
-            return True
-            
+            result = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            return result.returncode == 0
         except Exception as e:
             raise Exception(f"Error during conversion: {str(e)}")
